@@ -14,6 +14,22 @@ A reference is a video file. The `study_reference_video` tool saves a contact sh
 
 ## Install
 
+One line from an empty folder:
+
+```powershell
+git clone git@github.com:rusabego/vid-edit.git; Set-Location vid-edit; powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
+```
+
+```bash
+git clone git@github.com:rusabego/vid-edit.git && cd vid-edit && bash install.sh
+```
+
+```bat
+git clone git@github.com:rusabego/vid-edit.git && cd vid-edit && install.cmd
+```
+
+The first is PowerShell, the second is Git Bash, and the third is Command Prompt.
+
 From this folder, use one of:
 
 - PowerShell: `powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1`
