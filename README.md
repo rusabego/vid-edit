@@ -52,6 +52,24 @@ From this folder, use one of:
 - Windows command prompt: `install.cmd`
 - Git Bash: `bash install.sh`
 
+If this folder is already cloned, pull first so the script is current. PowerShell:
+
+```powershell
+git pull; powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
+```
+
+Git Bash:
+
+```bash
+git pull && bash install.sh
+```
+
+Command Prompt:
+
+```bat
+git pull && install.cmd
+```
+
 If `py -3`, `python`, or `python3` is missing or older than Python 3.11, PowerShell, Git Bash, and Command Prompt download Python 3.13.7 and unpack it into `.python` in this folder. That copy stays with the project and does not ask for an administrator login. The script builds `.venv` from it. FFmpeg is copied into `.venv\Scripts` from the `imageio-ffmpeg` package. Git Bash calls the same PowerShell script when Python is missing, so the download happens there too.
 
 The installer then registers the server and copies the `video-editor` skill. Restart the client after that.
