@@ -14,34 +14,13 @@ function Get-BasePython {
     return $null
 }
 
-function Install-LocalPython {
-    $dest = Join-Path $Root ".python"
-    $exe = Join-Path $dest "python.exe"
-    if (Test-Path $exe) { return $exe }
-    $installer = Join-Path $Root ".python-installer.exe"
-    $url = "https://www.python.org/ftp/python/3.13.7/python-3.13.7-amd64.exe"
-    Write-Host "Downloading Python into $dest"
-    Invoke-WebRequest -Uri $url -OutFile $installer
-    New-Item -ItemType Directory -Force -Path $dest | Out-Null
-    $args = @(
-        "/quiet", "InstallAllUsers=0", "PrependPath=0", "Include_test=0",
-        "Include_launcher=0", "Include_pip=1", "Shortcuts=0", "TargetDir=$dest"
-    )
-    $proc = Start-Process -FilePath $installer -ArgumentList $args -Wait -PassThru
-    if ($proc.ExitCode -ne 0) { throw "Python installer exited $($proc.ExitCode)" }
-    Remove-Item $installer -Force
-    if (-not (Test-Path $exe)) { throw "Python was not installed at $exe" }
-    return $exe
-}
-
 $base = Get-BasePython
 if (-not (Test-Path (Join-Path $Root ".venv\Scripts\python.exe"))) {
-    if ($base) {
-        & $base.File @($base.Extra) -m venv (Join-Path $Root ".venv")
-    } else {
-        $local = Install-LocalPython
-        & $local -m venv (Join-Path $Root ".venv")
+    if (-not $base) {
+        [Console]::Error.WriteLine("Python is not found.")
+        exit 1
     }
+    & $base.File @($base.Extra) -m venv (Join-Path $Root ".venv")
 }
 
 $py = Join-Path $Root ".venv\Scripts\python.exe"

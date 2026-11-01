@@ -14,21 +14,37 @@ A reference is a video file. The `study_reference_video` tool saves a contact sh
 
 ## Install
 
-One line from an empty folder:
+One line from an empty folder. PowerShell:
 
 ```powershell
 git clone git@github.com:rusabego/vid-edit.git; Set-Location vid-edit; powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
 ```
 
+```powershell
+git clone https://github.com/rusabego/vid-edit.git; Set-Location vid-edit; powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
+```
+
+Git Bash:
+
 ```bash
 git clone git@github.com:rusabego/vid-edit.git && cd vid-edit && bash install.sh
 ```
+
+```bash
+git clone https://github.com/rusabego/vid-edit.git && cd vid-edit && bash install.sh
+```
+
+Command Prompt:
 
 ```bat
 git clone git@github.com:rusabego/vid-edit.git && cd vid-edit && install.cmd
 ```
 
-The first is PowerShell, the second is Git Bash, and the third is Command Prompt.
+```bat
+git clone https://github.com/rusabego/vid-edit.git && cd vid-edit && install.cmd
+```
+
+The first line of each pair uses SSH. The second uses HTTPS.
 
 From this folder, use one of:
 
@@ -36,7 +52,7 @@ From this folder, use one of:
 - Windows command prompt: `install.cmd`
 - Git Bash: `bash install.sh`
 
-If `py -3` or `python` is missing, `install.ps1` downloads Python into `.python` in this repo (not onto the system PATH) and builds `.venv` from it. FFmpeg is copied into `.venv\Scripts` from the `imageio-ffmpeg` package.
+Python must already be installed (`py -3`, `python`, or `python3`). If none of those is found, the installer stops and prints `Python is not found.` It does not download or install Python. FFmpeg is copied into `.venv\Scripts` from the `imageio-ffmpeg` package.
 
 The installer then registers the server and copies the `video-editor` skill. Restart the client after that.
 

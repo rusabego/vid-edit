@@ -12,8 +12,8 @@ if [[ ! -x "$ROOT/.venv/Scripts/python.exe" && ! -x "$ROOT/.venv/bin/python" ]];
   elif command -v python >/dev/null 2>&1; then
     python -m venv "$ROOT/.venv"
   else
-    powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$ROOT/install.ps1"
-    exit $?
+    echo "Python is not found." >&2
+    exit 1
   fi
 fi
 
