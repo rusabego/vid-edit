@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Git Bash and other bash shells. On Windows, a missing Python is installed for the current user.
+# Git Bash and other bash shells. On Windows, a missing Python is unpacked into .python.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 cd "$ROOT"
@@ -10,7 +10,7 @@ real_python() {
   case "$bin" in
     *WindowsApps*) return 1 ;;
   esac
-  "$bin" -c "import sys" >/dev/null 2>&1
+  "$bin" -c "import sys, venv, ensurepip; raise SystemExit(0 if sys.version_info >= (3, 11) else 1)" >/dev/null 2>&1
 }
 
 venv_python() {
@@ -24,11 +24,19 @@ venv_python() {
 PY="$(venv_python || true)"
 if [[ -z "$PY" ]]; then
   BASE=""
-  if command -v py >/dev/null 2>&1 && py -3 -c "import sys" >/dev/null 2>&1; then
-    BASE="py -3"
-  elif command -v python3 >/dev/null 2>&1 && real_python python3; then
+  py_bin="$(command -v py || true)"
+  case "$py_bin" in
+    ""|*WindowsApps*) ;;
+    *)
+      if py -3 -c "import sys, venv, ensurepip; raise SystemExit(0 if sys.version_info >= (3, 11) else 1)" >/dev/null 2>&1; then
+        BASE="py -3"
+      fi
+      ;;
+  esac
+  if [[ -z "$BASE" ]] && command -v python3 >/dev/null 2>&1 && real_python python3; then
     BASE="python3"
-  elif command -v python >/dev/null 2>&1 && real_python python; then
+  fi
+  if [[ -z "$BASE" ]] && command -v python >/dev/null 2>&1 && real_python python; then
     BASE="python"
   fi
   if [[ -z "$BASE" ]]; then

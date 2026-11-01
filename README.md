@@ -52,7 +52,7 @@ From this folder, use one of:
 - Windows command prompt: `install.cmd`
 - Git Bash: `bash install.sh`
 
-If `py -3`, `python`, or `python3` is missing, PowerShell, Git Bash, and Command Prompt all download Python 3.13.7 and install it for the current user (no administrator prompt). The new interpreter is placed in `%LOCALAPPDATA%\Programs\Python\Python313`, then the script builds `.venv` from it. FFmpeg is copied into `.venv\Scripts` from the `imageio-ffmpeg` package. Git Bash calls the same PowerShell installer when Python is missing, so the download happens there too.
+If `py -3`, `python`, or `python3` is missing or older than Python 3.11, PowerShell, Git Bash, and Command Prompt download Python 3.13.7 and unpack it into `.python` in this folder. That copy stays with the project and does not ask for an administrator login. The script builds `.venv` from it. FFmpeg is copied into `.venv\Scripts` from the `imageio-ffmpeg` package. Git Bash calls the same PowerShell script when Python is missing, so the download happens there too.
 
 The installer then registers the server and copies the `video-editor` skill. Restart the client after that.
 
