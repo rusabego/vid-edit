@@ -1,0 +1,2 @@
+*.sh text eol=lf
+bin/video-editor text eol=lf

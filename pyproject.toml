@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "video-editor"
+version = "0.1.0"
+description = "Local video editor for MCP clients. Python and FFmpeg stay in the project venv."
+requires-python = ">=3.11"
+dependencies = [
+  "mcp>=2,<3",
+  "pillow>=10",
+  "imageio-ffmpeg>=0.6",
+]
+
+[project.scripts]
+video-editor = "video_editor.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["video_editor*"]

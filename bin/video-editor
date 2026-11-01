@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+if [[ -x "$ROOT/.venv/Scripts/python.exe" ]]; then
+  exec "$ROOT/.venv/Scripts/python.exe" -m video_editor.cli "$@"
+fi
+exec "$ROOT/.venv/bin/python" -m video_editor.cli "$@"

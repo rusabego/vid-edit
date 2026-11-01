@@ -1,0 +1,16 @@
+.venv/
+.python/
+video_editor.egg-info/
+*.egg-info/
+build/
+fonts/
+__pycache__/
+*.pyc
+*.wav
+*.mp4
+*.mov
+.mcp.json
+opencode.json
+.agents/mcp.json
+.agents/mcp_config.json
+.grok/config.toml
